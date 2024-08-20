@@ -7,10 +7,11 @@ class Player(
     nickname: String?
 ) {
     val nickname by lazy {
-        when (nickname) {
-            null -> "anonymous@${(1..100).random()}"
-            else -> nickname
-        }
+//        when (nickname) {
+//            null -> "anonymous@${(1..100).random()}"
+//            else -> nickname
+//        }
+        nickname ?: "anonymous@${(1..100).random()}"
     }
 
     override fun equals(other: Any?): Boolean {
