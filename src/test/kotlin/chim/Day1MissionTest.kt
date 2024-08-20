@@ -17,7 +17,7 @@ class Day1MissionTest : StringSpec({
     }
 
     "플레이어의 닉네임은 입력하지 않는 경우 자동부여 닉네임을 할당 받는다" {
-        val player = Player(name = "성현석")
+        val player = Player(name="성현석", nickname=null)
 
         val actual = player.nickname.split("@")
         actual[0] shouldBe "anonymous"
@@ -27,17 +27,14 @@ class Day1MissionTest : StringSpec({
     "이름과 닉네임이 같은 플레이어는 동일한 플레이어이다" {
         val player = Player("성현석", "침")
         val other = Player("성현석", "침")
-        val copied = player.copy() // data class 기본제공
 
         player shouldBeEqual other
-        player shouldBeEqual copied
-        other shouldBeEqual copied
     }
 
     "이름과 닉네임 중 하나라도 다른 플레이어는 다른 플레이어이다" {
         val player = Player("성현석", "침")
-        val copied = player.copy(nickname = "침착맨빠돌이")
+        val another = Player("성현석", "침착맨빠돌이")
 
-        player shouldNotBeEqual copied
+        player shouldNotBeEqual another
     }
 })
