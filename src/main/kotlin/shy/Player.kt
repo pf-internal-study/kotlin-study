@@ -4,17 +4,9 @@ import kotlin.random.Random
 
 
 class Player(var name : String, var nickName: String?) {
-    companion object {
-        const val DEFAULT_NICK_NAME = "anonymous@"
-
-        fun randomNumber(): Int {
-            return Random.nextInt(100) + 1
-        }
-    }
-
     init {
         if (nickName.isNullOrEmpty()) {
-            nickName = DEFAULT_NICK_NAME + randomNumber()
+            nickName = randomNickName()
         }
     }
 
@@ -27,5 +19,11 @@ class Player(var name : String, var nickName: String?) {
 
     override fun hashCode(): Int {
         return name.hashCode()  + nickName.hashCode()
+    }
+
+    companion object {
+        fun randomNickName(): String {
+            return "anonymous@${Random.nextInt(100) + 1}"
+        }
     }
 }
