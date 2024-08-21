@@ -48,7 +48,17 @@ class PlayerMinTest : StringSpec({
         for (i in 0..6 step 2) {
             actualValues.add(i)
         }
-
         actualValues shouldBe expectedValues
     }
+
+    "downTo loop는 downTo 만큼 값을 감소시킨다" {
+        val expectedValues = listOf(3, 2, 1)
+        val actualValues = mutableListOf<Int>()
+
+        for (i in 3 downTo 1) {
+            actualValues.add(i)
+        }
+        actualValues shouldBe expectedValues
+    }
+
 })
