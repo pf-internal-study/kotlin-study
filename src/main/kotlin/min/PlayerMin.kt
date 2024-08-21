@@ -8,7 +8,7 @@ data class PlayerMin(
 ) {
     companion object {
         fun generateRandomNickname(): String {
-            val randomValue = Random().nextInt(1, 100)
+            val randomValue = (1..100).random()
             return "anonymous@$randomValue"
         }
     }
