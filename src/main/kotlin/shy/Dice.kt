@@ -9,17 +9,18 @@ class Dice {
      */
     fun roll(): Int {
         eyes = (1..6).random()
-        return eyes as Int
+        return eyes!!
     }
 
     /**
      * 주사위를 굴려 나온 값을 볼 수 있는 기능
      * - 단 주사위를 굴리기 전엔 볼 수 없다.
      */
-    fun view() {
+    fun view(): Int {
         if (eyes == null) {
             throw Exception("주사위를 먼저 굴려주세요.")
         }
         print("현재 주사위 눈금은 $eyes 입니다.")
+        return eyes!!
     }
 }
