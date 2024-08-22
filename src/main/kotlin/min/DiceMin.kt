@@ -10,7 +10,7 @@ class DiceMin {
     companion object {
         const val MEMBER_NOT_ROLLED_MESSAGE = "주사위를 아직 굴리지 않았습니다."
     }
-
+    
     fun getEyes(): Int? {
         return this.eyes
     }
