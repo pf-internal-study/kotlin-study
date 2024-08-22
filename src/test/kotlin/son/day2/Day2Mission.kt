@@ -17,7 +17,7 @@ import io.kotest.matchers.shouldBe
 
 class Day2Mission : StringSpec({
 
-    "주사위 눈은 주사위 생성 시점엔 값을 가지지 않으며 조회 시 IllegalStateException 에러가 발생한다." {
+    "주사위 눈은 주사위 생성 시점엔 값을 가지지 않으며 Roll 전 조회 시 IllegalStateException 에러가 발생한다." {
         val dice = Dice()
 
         val error: IllegalStateException = shouldThrow<IllegalStateException> {
@@ -30,7 +30,9 @@ class Day2Mission : StringSpec({
         val dice = Dice()
 
         val result = dice.roll()
+        val eyes = dice.view()
 
         result shouldBeInRange 1..6
+        eyes shouldBeInRange 1..6
     }
 })
