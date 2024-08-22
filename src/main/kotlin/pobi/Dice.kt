@@ -10,7 +10,7 @@ class Dice() {
 
     fun roll(): Int {
         this.eyes = (1..6).random()
-        return this.eyes!!;
+        return this.eyes!!
     }
 
     /*
@@ -19,7 +19,7 @@ class Dice() {
     * */
 
     fun view(): Int? {
-        return this.eyes;
+        return this.eyes
     }
 }
 
