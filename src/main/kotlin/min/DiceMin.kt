@@ -25,9 +25,9 @@ class DiceMin {
         return eyes ?: throw IllegalStateException(DiceMin.MEMBER_NOT_ROLLED_MESSAGE)
     }
 
-    fun view2(): Any {
+    fun view2(): Int {
         // 코틀린 예외는 Nothing 타입으로 반환가능 (변수화 가능)
-        return eyes ?: failView(GLOBAL_NOT_ROLLED_MESSAGE)
+        return (eyes ?: failView(GLOBAL_NOT_ROLLED_MESSAGE)) as Int
     }
 
     private fun failView(message: String) {
