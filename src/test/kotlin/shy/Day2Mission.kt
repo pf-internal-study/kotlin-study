@@ -39,7 +39,6 @@ class Day2Mission: StringSpec ({
             dice.view()
         }
 
-        exception  shouldBe Unit
+        exception shouldBe Unit
     }
 })
-

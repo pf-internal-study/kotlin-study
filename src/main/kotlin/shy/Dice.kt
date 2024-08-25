@@ -17,10 +17,9 @@ class Dice {
      * - 단 주사위를 굴리기 전엔 볼 수 없다.
      */
     fun view(): Int {
-        if (eyes == null) {
-            throw Exception("주사위를 먼저 굴려주세요.")
-        }
-        print("현재 주사위 눈금은 $eyes 입니다.")
-        return eyes!!
+        return eyes ?: throw Exception("주사위를 먼저 굴려주세요.")
+
+//        print("현재 주사위 눈금은 $eyes 입니다.")
+//        return eyes!!
     }
 }
