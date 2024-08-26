@@ -1,6 +1,6 @@
 package internal.study.kotlin.min
 
-class Round {
+class RoundMin {
     private val records: MutableMap<PlayerMin, List<Int>> = mutableMapOf()
     private var winner: PlayerMin? = null
 

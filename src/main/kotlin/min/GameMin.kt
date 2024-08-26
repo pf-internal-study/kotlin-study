@@ -1,7 +1,7 @@
 package internal.study.kotlin.min
 
 class GameMin {
-    private val rounds: MutableList<Round> = MutableList(10) { Round() }
+    private val rounds: MutableList<RoundMin> = MutableList(10) { RoundMin() }
     private val players: MutableList<PlayerMin> = mutableListOf()
     private var winner: PlayerMin? = null
 
