@@ -21,11 +21,11 @@ class RoundMin {
 
     /* 해당 라운드 승자 결정 */
     private fun determineWinner() {
-        TODO("승자 결정 구현")
+        winner = records.maxByOrNull {(_, diceResults) -> diceResults.sum()}?.key
     }
 
     /* 해당 라운드 승자 리턴 */
     fun getRoundWinner(): PlayerMin {
-        TODO("라운드 승자 리턴")
+        return winner ?: throw IllegalStateException("승자가 정해지지 않았습니다.")
     }
 }
