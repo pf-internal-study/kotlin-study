@@ -1,7 +1,7 @@
 package dennis
 
 import internal.study.kotlin.dennis.DiceNumber
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 
