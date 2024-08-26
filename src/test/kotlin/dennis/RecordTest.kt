@@ -10,7 +10,7 @@ import internal.study.kotlin.dennis.Record as Record
 
 class RecordTest {
     @Test
-    fun `addDie adds a die to the list`() {
+    fun `주사위추가_리스트에_주사위를_추가한다`() {
         val player = Player("John")
         val record = Record(player)
         val die = Die(DieNumber.from(6))
@@ -22,7 +22,7 @@ class RecordTest {
     }
 
     @Test
-    fun `addDie throws exception when more than 5 dice are added`() {
+    fun `주사위추가_5개_이상_추가시_예외를_발생시킨다`() {
         val player = Player("John")
         val record = Record(player)
 
@@ -36,7 +36,7 @@ class RecordTest {
     }
 
     @Test
-    fun `playerName returns the correct player name`() {
+    fun `플레이어이름_올바른_플레이어_이름을_반환한다`() {
         val player = Player("John")
         val record = Record(player)
 
@@ -44,7 +44,7 @@ class RecordTest {
     }
 
     @Test
-    fun `dice returns the correct list of dice`() {
+    fun `주사위_올바른_주사위_목록을_반환한다`() {
         val player = Player("John")
         val record = Record(player)
         val die1 = Die(DieNumber.from(6))
