@@ -56,10 +56,10 @@ class Day3Mission: BehaviorSpec({
         When("게임에 플레이어가 중복 참여하면") {
             val game = Game()
             Then("예외가 발생한다") {
+                val player = Player("성현석", "침")
+                val other = Player("성현석", "침")
+                game.join(player)
                 val exception = shouldThrow<IllegalStateException> {
-                    val player = Player("성현석", "침")
-                    val other = Player("성현석", "침")
-                    game.join(player)
                     game.join(other)
                 }
 
