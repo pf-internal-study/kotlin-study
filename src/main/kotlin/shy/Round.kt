@@ -1,16 +1,14 @@
 package internal.study.kotlin.shy
 
-class Round(private var winner: Player?) {
-    private lateinit var record: MutableMap<Player, MutableList<Int>>
+class Round {
+    private val _records: MutableMap<Player, List<Int>> = mutableMapOf()
+    var winner: Player? = null
+
+    val records: Map<Player, List<Int>>
+        get() = _records.toMap()
 
     fun join(player: Player) {
-        record.put(player, mutableListOf())
-    }
-
-    fun addEyes(player: Player, score: Int) {
-        val eyes: MutableList<Int>? = record.get(player)
-        eyes!!.add(score)
-        record.put(player, eyes)
+        TODO("다음 기회에")
     }
 
     fun win() {
