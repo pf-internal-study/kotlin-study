@@ -1,7 +1,7 @@
 package internal.study.kotlin.min
 
 class GameMin {
-    private val rounds: List<RoundMin> = List(10) { RoundMin() }
+    private val rounds: List<RoundMin> = List(TOTAL_ROUNDS) { RoundMin() }
     private val _players: MutableList<PlayerMin> = mutableListOf()
     private var winner: PlayerMin? = null
 
@@ -34,5 +34,9 @@ class GameMin {
     /* 최종 우승자 반환 */
     fun getFinalWinner(): PlayerMin {
         return winner ?: throw IllegalStateException("게임이 아직 끝나지 않았습니다.")
+    }
+
+    companion object {
+        private const val TOTAL_ROUNDS = 10
     }
 }
