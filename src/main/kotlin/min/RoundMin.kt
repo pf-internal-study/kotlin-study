@@ -4,6 +4,9 @@ class RoundMin {
     private val records: MutableMap<PlayerMin, List<Int>> = mutableMapOf()
     private var winner: PlayerMin? = null
 
+    val recordSnapshot: Map<PlayerMin, List<Int>>
+        get() = records.toMap()
+
     /* 라운드 시작 */
     fun playRound(players: List<PlayerMin>) {
         players.forEach { player ->
