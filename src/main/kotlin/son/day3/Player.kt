@@ -4,17 +4,16 @@ class Player(
     val name: String,
     var nickname: String?
 ) {
-    private val _winCount: Int = 0
+    private var _winCount: Int = 0
+
+    val winCount: Int
+        get() = _winCount
 
     init {
         this.nickname = nickname ?: "anonymous@${(1..100).random()}"
     }
 
     fun win() {
-        _winCount.inc()
-    }
-
-    fun winCount(): Int {
-        return _winCount
+        _winCount++
     }
 }

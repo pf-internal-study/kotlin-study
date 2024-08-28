@@ -8,11 +8,22 @@ package internal.study.kotlin.son.day3
 */
 
 class Records(private val player: Player) {
-    private val records: List<Int> = emptyList()
+    private val _dices = mutableListOf<DiceEyes>()
 
-    fun record(eyes: Int) {
-        require(eyes in 1..6) { "주사위의 눈금은 1~6 사이여야 합니다." }
-        require(records.size < 5) { "주사위는 5개만 던질 수 있습니다." }
-        records.toMutableList().add(eyes)
+    val playerName: String
+        get() = player.name
+
+    fun add(eyes: DiceEyes) {
+        check(_dices.size < MAX_DICE) { NOT_ROLL_MAX_DICE }
+        _dices.add(eyes)
+    }
+
+    fun sum(): Int {
+        return _dices.sumOf { it.eyes }
+    }
+
+    companion object {
+        private const val MAX_DICE = 5
+        private const val NOT_ROLL_MAX_DICE = "주사위는 5개까지만 던질 수 있습니다."
     }
 }

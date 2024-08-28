@@ -9,51 +9,95 @@ package internal.study.kotlin.son.day3
 최종 우승자(winner)는 게임이 종료될 때, 가장 많은 라운드를 승리한 플레이어로 결정된다.
 최종 우승자가 정해지기 전까지 우승자는 없다.
 */
-class Game(round: Int = 10) {
+class Game(val round: Int = 10) {
     private var _players = mutableListOf<Player>()
-    private val _rounds = round
+    private val rounds = mutableListOf(Int, records)
+    private val _records = mutableMapOf<Player, Records>()
     private var _winner: Player? = null
-    private var _isStart: Boolean = false
+    private var _start: Boolean = false
 
-    init {
-        require(round > 1) { MIN_ROUND }
-    }
+    val records: Map<Player, Records>
+        get() = _records
 
-    fun getRounds(): Int {
-        return _rounds
-    }
+    val start: Boolean
+        get() = _start
+
+    val winner: Player?
+        get() = _winner
 
     fun join(player: Player) {
-        require(!_players.contains(player)) { ALREADY_JOINED_PLAYER }
+        check(!_players.contains(player)) { ALREADY_JOINED_PLAYER }
         _players.add(player)
     }
 
-    fun join(players: List<Player>) {
-        players.forEach { player ->
-            require(!this._players.contains(player)) { ALREADY_JOINED_PLAYER }
-        }
-        this._players.addAll(players)
+    fun set() {
+        check(_players.isNotEmpty()) { NOT_FOUND_PLAYER }
+        check(!_start) { ALREADY_STARTED_GAME }
+
+        _start = true
     }
 
-    fun start() {
-        require(_players.isNotEmpty()) { NOT_FOUND_PLAYER }
-        require(!_isStart) { ALREADY_STARTED_GAME }
+    fun playRound() {
+        check(_start) { NOT_STARTED_GAME }
 
-        _isStart = true
+        val dice = Dice()
+
+        for (i in 1..round) {
+            setRound()
+
+            val roundWinner = mutableMapOf<Player, Int>()
+            playDice(dice, i, roundWinner)
+
+            // 라운드 승자 결정
+            roundWinner.maxByOrNull { it.value }?.let {
+                println("round : $i winner : ${it.key.name}")
+                it.key.win()
+            }
+
+            println("round : $i 완료.")
+        }
+    }
+
+    private fun playDice(
+        dice: Dice,
+        i: Int,
+        roundWinner: MutableMap<Player, Int>
+    ) {
+        records.forEach { (player, records) ->
+            for (j in 1..5) {
+                val result = dice.roll()
+                records.add(result)
+            }
+
+            roundWinner[player] = records.sum()
+            println("player : ${player.name} round : $i sum : ${records.sum()}")
+        }
     }
 
     fun finish() {
-        require(_isStart) { NOT_STARTED_GAME }
+        check(_start) { NOT_STARTED_GAME }
 
-        val winner = _players.maxByOrNull { it.winCount() }
+        _players.forEach { player ->
+            println("${player.name} : ${player.winCount}")
+        }
+
+        val winner = _players.maxByOrNull { it.winCount }
         this._winner = winner
+
+        println("최종 우승자는 ${winner?.name} 입니다.")
     }
 
+    private fun setRound() {
+        check(_start) { NOT_STARTED_GAME }
+
+        _players.forEach { player ->
+            _records[player] = Records(player)
+        }
+    }
     companion object {
         private const val NOT_FOUND_PLAYER = "참가한 플레이어가 없습니다."
         private const val ALREADY_STARTED_GAME = "이미 시작된 게임입니다."
         private const val ALREADY_JOINED_PLAYER = "이미 참가한 플레이어입니다."
-        private const val MIN_ROUND = "라운드는 최소 1개 이상이여야합니다. "
         private const val NOT_STARTED_GAME = "게임이 시작되지 않았습니다."
     }
 }
