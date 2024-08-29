@@ -2,12 +2,9 @@ package internal.study.kotlin.shy
 
 
 class Game{
-    private val _rounds: MutableList<Round> = mutableListOf()
+    private val rounds: List<Round> = List(ROUNDS_COUNT) { Round() }
     private val _players: MutableList<Player> = mutableListOf()
     var winner: Player? = null
-
-    val rounds: List<Round>
-        get() = _rounds.toList()
 
     val players: List<Player>
         get() = _players.toList()
@@ -28,5 +25,9 @@ class Game{
      */
     fun win(): Player {
        TODO("다음 기회에")
+    }
+
+    companion object {
+        private const val ROUNDS_COUNT = 10
     }
 }
