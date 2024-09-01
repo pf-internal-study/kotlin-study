@@ -1,6 +1,6 @@
 package internal.study.kotlin.pobi
 
-class Dice() {
+class Dice {
     var eyes: Int? = null
 
     init {

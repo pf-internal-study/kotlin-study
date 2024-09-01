@@ -11,7 +11,7 @@ class GameTest : StringSpec({
     "게임에는 플레이어가 참가할수 있다." {
         val actual = Game()
         actual.joinPlayer(Player("포비", "곰은 사람을 찢어"))
-        actual.getPlayers() shouldHaveSize  1
+        actual.players shouldHaveSize  1
     }
 
     "중복 플레이어가 참가할수 있다." {
