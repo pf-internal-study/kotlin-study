@@ -13,22 +13,25 @@ class GameMin {
         if (_players.contains(player)) {
             throw IllegalArgumentException("${player.name}는 이미 참여하였습니다.")
         }
+        player.setDice(List(DICE_GIVEN_COUNT) { DiceMin() })
         _players.add(player)
     }
 
     /* 게임 시작 */
-    fun start() {
+    fun run() {
         if (_players.isEmpty()) {
             throw IllegalStateException("참가자가 없습니다.")
         }
 
-        rounds.forEach { round -> round.playRound(_players) }
+        rounds.forEach { round -> round.run(_players) }
         determineFinalWinner()
     }
 
     /* 최종 우승자 결정 */
     private fun determineFinalWinner() {
-        TODO("라운드 최종 승 결정")
+        winner = players.maxByOrNull { player ->
+            rounds.count { round -> round.getRoundWinner() == player }
+        }
     }
 
     /* 최종 우승자 반환 */
@@ -38,5 +41,6 @@ class GameMin {
 
     companion object {
         private const val TOTAL_ROUNDS = 10
+        private const val DICE_GIVEN_COUNT = 5
     }
 }
