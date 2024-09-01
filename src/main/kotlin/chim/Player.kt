@@ -13,14 +13,7 @@ class Player(
     }
 
     private lateinit var dice: List<Dice>
-    var age: Int = 0
-        set(value) {
-            field = value * 2
-        }
 
-    fun setAge(age: Int) {
-        this.age = age
-    }
     fun addDice() {
         dice = List(5) { Dice() }
     }
@@ -53,5 +46,9 @@ class Player(
         var result = name.hashCode()
         result = 31 * result + nickname.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return nickname
     }
 }
