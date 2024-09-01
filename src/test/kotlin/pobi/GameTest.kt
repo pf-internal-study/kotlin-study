@@ -14,7 +14,7 @@ class GameTest : StringSpec({
         actual.players shouldHaveSize  1
     }
 
-    "중복 플레이어가 참가할수 있다." {
+    "중복 플레이어가 참가할수 없다." {
         val actual = Game()
         actual.joinPlayer(Player("포비", "곰은 사람을 잔인하게 찢어"))
         val exception = shouldThrow<IllegalStateException> {

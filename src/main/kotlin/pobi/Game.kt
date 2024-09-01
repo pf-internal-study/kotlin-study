@@ -17,6 +17,6 @@ class Game {
     }
 
     fun setFinalWinner() {
-        // todo
+        TODO("내일의 내가 만들기")
     }
 }
