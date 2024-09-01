@@ -19,7 +19,7 @@ class Day4Mission : StringSpec({
         diceResults.size shouldBe 5
     }
 
-    "플레이어는 주사위를 할당받은 이후 변경할 수 없다." {
+    "플레이어는 주사위를 할당받은 이후 변경할 수 없다" {
         val exception = shouldThrow<IllegalStateException> {
             val min = PlayerMin("min")
             val game = GameMin()
@@ -59,7 +59,7 @@ class Day4Mission : StringSpec({
         (winner == player1 || winner == player2) shouldBe true
     }
 
-    "5명의 플레이어가 참가하여 게임을 실행했을 때 최종 승자를 반환한다" {
+    "게임에는 최종승자가 반드시 존재한다" {
         val players = listOf(
             PlayerMin("민"),
             PlayerMin("침"),
