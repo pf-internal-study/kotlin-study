@@ -28,9 +28,9 @@ class Game {
 
     fun start() {
         rounds.forEach { round ->
-            println("------------------ start -------------------")
+            println("------------------ round start -------------------")
             round.run(_players)
-            println("------------------ end -------------------")
+            println("------------------ round end -------------------")
         }
     }
     /***
