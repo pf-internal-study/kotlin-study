@@ -13,17 +13,15 @@ class RoundMin {
             val diceResults = player.rollDice()
             _records[player] = diceResults
         }
-
-        val maxScore = _records.maxOfOrNull { (_, diceResults) -> diceResults.sum() }
+        val currentRoundRecords = _records.filterKeys { it in players }
+        val maxScore = currentRoundRecords.maxOfOrNull { (_, diceResults) -> diceResults.sum() }
             ?: throw IllegalStateException("점수를 계산할 수 없습니다.")
-
-        val candidates = _records.filterValues { it.sum() == maxScore }.keys
+        val candidates = currentRoundRecords.filterValues { it.sum() == maxScore }.keys
 
         if (candidates.size == 1) {
             winner = candidates.first()
             return
         }
-
         run(candidates.toList())
     }
 
