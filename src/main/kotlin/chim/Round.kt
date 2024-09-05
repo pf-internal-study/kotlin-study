@@ -14,20 +14,25 @@ class Round(
         get() = _winner
 
     fun run(players: List<Player>): Player {
+        return pickWinner(players).also {
+            _winner = it
+        }
+    }
+
+    private fun pickWinner(players: List<Player>): Player {
+        if (players.size == 1) {
+            return players.first()
+        }
+
         attempts++
         players.forEach {
             _records[it] = it.rollDice()
         }
-
         val winnerPlayers = records.filter { players.contains(it.key) }
             .winnerPlayers()
         printRound(winnerPlayers)
 
-        _winner = when {
-            winnerPlayers.size == 1 -> winnerPlayers.first()
-            else -> run(winnerPlayers)
-        }
-        return winner!!
+        return pickWinner(winnerPlayers)
     }
 
     private fun printRound(winners: List<Player>) {
