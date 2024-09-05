@@ -21,5 +21,3 @@ class Dice {
         return this.eyes
     }
 }
-
-
