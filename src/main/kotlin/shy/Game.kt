@@ -16,6 +16,7 @@ class Game {
     fun join(players: List<Player>) {
         players.forEach {player -> join(player)}
     }
+
     /**
      * 게임에 참가
      */
@@ -33,6 +34,7 @@ class Game {
             println("------------------ round end -------------------")
         }
     }
+
     /***
      * 승리자를 확인
      */

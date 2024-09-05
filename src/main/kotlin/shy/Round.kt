@@ -7,7 +7,7 @@ class Round {
     val records: Map<Player, List<Int>>
         get() = _records.toMap()
 
-    fun run(players: List<Player>): Player {
+    fun run(players: List<Player>) {
         players.forEach { player ->
             player.rollDice()
             _records[player] = player.getEyes()
@@ -25,7 +25,6 @@ class Round {
         }
 
         println("라운드 승자는 ${winner!!.name} 입니다.")
-        return winner!!;
     }
 
     /**
