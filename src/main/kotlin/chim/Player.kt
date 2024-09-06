@@ -1,7 +1,5 @@
 package internal.study.kotlin.chim
 
-import java.util.Random
-
 class Player(
     val name: String,
     nickname: String?
@@ -12,6 +10,24 @@ class Player(
 //            else -> nickname
 //        }
         nickname ?: "anonymous@${(1..100).random()}"
+    }
+
+    private lateinit var dice: List<Dice>
+
+    fun addDice() {
+        dice = List(5) { Dice() }
+    }
+
+    fun hasDice(): Boolean {
+        return try {
+            dice.isNotEmpty()
+        } catch (e: UninitializedPropertyAccessException) {
+            false
+        }
+    }
+
+    fun rollDice(): List<Int> {
+        return dice.map { it.roll() }
     }
 
     override fun equals(other: Any?): Boolean {
@@ -30,5 +46,9 @@ class Player(
         var result = name.hashCode()
         result = 31 * result + nickname.hashCode()
         return result
+    }
+
+    override fun toString(): String {
+        return nickname
     }
 }

@@ -1,14 +1,21 @@
 package internal.study.kotlin.shy
 
 
-class Game{
-    private val rounds: List<Round> = List(ROUNDS_COUNT) { Round() }
+class Game {
+    private val _rounds: List<Round> = List(ROUNDS_COUNT) { Round() }
     private val _players: MutableList<Player> = mutableListOf()
     var winner: Player? = null
 
     val players: List<Player>
         get() = _players.toList()
 
+    val rounds: List<Round>
+        get() = _rounds.toList()
+
+
+    fun join(players: List<Player>) {
+        players.forEach {player -> join(player)}
+    }
 
     /**
      * 게임에 참가
@@ -18,6 +25,14 @@ class Game{
             throw IllegalStateException("이미 참가한 플레이어 입니다.")
 
         _players.add(player)
+    }
+
+    fun start() {
+        rounds.forEach { round ->
+            println("------------------ round start -------------------")
+            round.run(_players)
+            println("------------------ round end -------------------")
+        }
     }
 
     /***
