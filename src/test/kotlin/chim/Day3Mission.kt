@@ -17,7 +17,7 @@ class Day3Mission: BehaviorSpec({
             val round = Round(1)
             Then("기록지는 비어있고, 승자는 없다") {
                 round.id shouldBe 1
-                round.records shouldHaveSize 0
+                round.recordSheets shouldHaveSize 0
                 round.winner shouldBe null
             }
         }
@@ -36,7 +36,7 @@ class Day3Mission: BehaviorSpec({
             }
 
             Then("최종 우승자는 없다") {
-                game.winner shouldBe null
+                game.winners shouldBe emptySet()
             }
         }
 
