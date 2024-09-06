@@ -1,41 +1,34 @@
 package internal.study.kotlin.min
 
 class RoundMin {
-    private val _records: MutableMap<PlayerMin, List<Int>> = mutableMapOf()
-    private var winner: PlayerMin? = null
+    private val _records: MutableList<RecordMin> = mutableListOf()
+    private var _winner: PlayerMin? = null
+    private var attempts: Int = 0
 
-    val records: Map<PlayerMin, List<Int>>
-        get() = _records.toMap()
+    val records: List<RecordMin>
+        get() = _records.toList()
+
+    val winner: PlayerMin?
+        get() = _winner
 
     /* 라운드 시작 */
     fun run(players: List<PlayerMin>) {
-        players.forEach { player ->
-            val diceResults = player.rollDice()
-            _records[player] = diceResults
+        require(players.isNotEmpty()) {
+            "이 시점에 플레이어가 없을 수 없는데 없습니다. 에린한테 문의해주세욬ㅋ"
         }
-        print(_records)
-        val currentRoundRecords = _records.filterKeys { it in players }
-        val maxScore = currentRoundRecords.maxOfOrNull { (_, diceResults) -> diceResults.sum() }
-            ?: throw IllegalStateException("점수를 계산할 수 없습니다.")
-        val candidates = currentRoundRecords.filterValues { it.sum() == maxScore }.keys
 
-        if (candidates.size == 1) {
-            winner = candidates.first()
-            println("우승자!: ${winner?.name} 점수: ${currentRoundRecords[winner]?.sum()}")
-            return
+        attempts++
+        val roundRecords = players.map { player ->
+            RecordMin(player, player.rollDice(), attempts)
         }
-        run(candidates.toList())
-    }
+        _records.addAll(roundRecords)
 
-    /* 라운드 승자 리턴 */
-    fun getRoundWinner(): PlayerMin {
-        return winner ?: throw IllegalStateException("승자가 정해지지 않았습니다.")
-    }
+        val maxScore = roundRecords.maxOf { it.score }
+        val candidates = roundRecords.filter { it.score == maxScore }.map { it.player }
 
-    fun print(records : MutableMap<PlayerMin, List<Int>>) {
-        println("라운드 결과:")
-        records.forEach { (player, results) ->
-            println("${player.name}: ${results.sum()} (${results.joinToString(", ")})")
+        when (candidates.size) {
+            1 -> _winner = candidates.first()
+            else -> run(candidates)
         }
     }
 }

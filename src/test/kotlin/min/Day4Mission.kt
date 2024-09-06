@@ -41,8 +41,8 @@ class Day4Mission : StringSpec({
 
         val records = round.records
         records.size shouldBe 2
-        records.containsKey(player1) shouldBe true
-        records.containsKey(player2) shouldBe true
+        records.any { it.player == player1 } shouldBe true
+        records.any { it.player == player2 } shouldBe true
     }
 
     "라운드 승자가 선정된다" {
@@ -55,8 +55,7 @@ class Day4Mission : StringSpec({
         val round = RoundMin()
         round.run(game.players)
 
-        val winner = round.getRoundWinner()
-        (winner == player1 || winner == player2) shouldBe true
+        (round.winner == player1 || round.winner == player2) shouldBe true
     }
 
     "게임에는 최종승자가 반드시 존재한다" {
@@ -72,7 +71,6 @@ class Day4Mission : StringSpec({
 
         game.run()
 
-        val winner = game.getFinalWinner()
-        players.contains(winner) shouldBe true
+        players.contains(game.winner) shouldBe true
     }
 })
